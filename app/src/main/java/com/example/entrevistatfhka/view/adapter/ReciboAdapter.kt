@@ -25,11 +25,8 @@ class ReciboAdapter(var listRecibo: List<ModelFactura> ) :RecyclerView.Adapter<R
     override fun onBindViewHolder(holder: MiViewHolderRecibo, position: Int) {
 
         val recibo = listRecibo[position]
-
         with(holder.binding){
-
             etFacturaNombre.text = recibo.recibo.cliente
-
             etFacturaCantidad.text = "${recibo.producto.size}"
 
 
