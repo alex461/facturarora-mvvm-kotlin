@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.entrevistatfhka.R
-import com.example.entrevistatfhka.data.domain.ModelRecibo
 import com.example.entrevistatfhka.databinding.Fragment5Binding
 import com.example.entrevistatfhka.utils.BaseFragment
 import com.example.entrevistatfhka.utils.showHide
@@ -80,6 +78,8 @@ class Fragment5 : BaseFragment<MyViewModel, Fragment5Binding>() {
             viewModel.guardarRecibo()
 
             findNavController().navigate(R.id.action_fragment5_to_fragment1)
+
+
 
 
         }

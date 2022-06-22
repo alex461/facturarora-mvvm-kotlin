@@ -92,14 +92,9 @@ class Fragment4 : BaseFragment<MyViewModel, Fragment4Binding>() {
 
         viewModel.loginResult.observe(viewLifecycleOwner) { success ->
 
-
             if (success) {
 
-
                 with(binding) {
-
-
-
 
                     viewModel.agregarProducto(
                         ModelProducto(
@@ -127,29 +122,36 @@ class Fragment4 : BaseFragment<MyViewModel, Fragment4Binding>() {
         }
 
 
+        //---------------- se verifica que no tenga campo vacio
 
-        with(binding) {
+        lifecycleScope.launchWhenResumed {
 
-
-            etCodigo.doOnTextChanged { text, start, count, after ->
-
-                if (after == 0) tfCodigo.error = "Debe ingresar el código"
-                else tfCodigo.error = ""
-            }
-
-            etDescripcion.doOnTextChanged { text, start, count, after ->
-                if (after == 0) tfDescripcion.error = "Debe ingresar la descripción"
-                else tfDescripcion.error = ""
-            }
+            with(binding) {
 
 
-            etPrecio.doOnTextChanged { text, start, count, after ->
-                if (after == 0) tfPrecio.error = "Debe ingresar el precio"
-                else tfPrecio.error = ""
+                etCodigo.doOnTextChanged { text, start, count, after ->
+
+                    if (after == 0) tfCodigo.error = "Debe ingresar el código"
+                    else tfCodigo.error = ""
+                }
+
+                etDescripcion.doOnTextChanged { text, start, count, after ->
+                    if (after == 0) tfDescripcion.error = "Debe ingresar la descripción"
+                    else tfDescripcion.error = ""
+                }
+
+
+                etPrecio.doOnTextChanged { text, start, count, after ->
+                    if (after == 0) tfPrecio.error = "Debe ingresar el precio"
+                    else tfPrecio.error = ""
+                }
+
+
             }
 
 
         }
+
 
 
 //---------------------------------------------------------------------
@@ -184,7 +186,12 @@ class Fragment4 : BaseFragment<MyViewModel, Fragment4Binding>() {
         }
 
 
+            binding.buttonAnterior.setOnClickListener {
 
+                findNavController().navigate(R.id.action_fragment4_to_fragment3)
+
+
+            }
 
 
     }

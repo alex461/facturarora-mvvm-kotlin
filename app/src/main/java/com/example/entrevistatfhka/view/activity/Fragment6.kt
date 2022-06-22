@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.entrevistatfhka.databinding.Fragment6Binding
 import com.example.entrevistatfhka.utils.BaseFragment
 import com.example.entrevistatfhka.view.adapter.FacturaAdapter
-import com.example.entrevistatfhka.view.adapter.ProductoAdpater
 import com.example.entrevistatfhka.view.adapter.ReciboAdapter
 import com.example.entrevistatfhka.viewModel.MyViewModel
 
@@ -35,7 +32,10 @@ class Fragment6 : BaseFragment<MyViewModel, Fragment6Binding>() {
 
         binding.rvRecibos.also { recycler ->
 
-        binding.tvListaVacia.isVisible = recycler.size <= 0
+
+         binding.tvListaVacia.visibility = if (facturas.isEmpty()) View.VISIBLE else View.GONE
+
+
 
            recycler.adapter = ReciboAdapter(facturas)
         }

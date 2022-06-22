@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.entrevistatfhka.R
-import com.example.entrevistatfhka.data.domain.ModelRecibo
 import com.example.entrevistatfhka.databinding.Fragment3Binding
 import com.example.entrevistatfhka.utils.BaseFragment
 import com.example.entrevistatfhka.utils.Constante
 import com.example.entrevistatfhka.viewModel.MyViewModel
-import kotlinx.coroutines.flow.first
 
 
 class Fragment3 : BaseFragment<MyViewModel, Fragment3Binding>() {
@@ -48,12 +46,24 @@ class Fragment3 : BaseFragment<MyViewModel, Fragment3Binding>() {
 
         }
 
+        binding.buttonAnterior.setOnClickListener {
 
-        lifecycleScope.launchWhenResumed {
-
-            read()
+            findNavController().navigate(R.id.action_fragment3_to_fragment2)
 
         }
+
+
+        settingPreferences.userPreferences.asLiveData().observe(viewLifecycleOwner){ preference ->
+
+            binding.etRazonSocial.setText(preference.razonSocialEmisor)
+
+            if (preference.numeroDeRif!=0)
+            binding.etRif.setText(preference.numeroDeRif.toString())
+
+        }
+
+
+
 
         viewModel.loginResult.observe(viewLifecycleOwner) {
 
@@ -70,38 +80,35 @@ class Fragment3 : BaseFragment<MyViewModel, Fragment3Binding>() {
         }
 
 
-        with(binding) {
+        lifecycleScope.launchWhenResumed {
+
+            with(binding) {
 
 
-            etRazonSocial.doOnTextChanged { text, start, count, after ->
+                etRazonSocial.doOnTextChanged { text, start, count, after ->
 
-                if (after == 0)
+                    if (after == 0)
 
-                    tfRazonSocial.error = "Debe ingresar un nombre"
-                else tfRazonSocial.error = ""
+                        tfRazonSocial.error = "Debe ingresar un nombre"
+                    else tfRazonSocial.error = ""
+                }
+
+                etRif.doOnTextChanged { text, start, count, after ->
+                    if (after == 0) tfRif.error = "Debe ingresar un nombre"
+                    else tfRif.error = ""
+                }
+
+
             }
-
-            etRif.doOnTextChanged { text, start, count, after ->
-                if (after == 0) tfRif.error = "Debe ingresar un nombre"
-                else tfRif.error = ""
-            }
-
 
         }
 
 
+
+
     }
 
-    private suspend fun read (){
 
-
-
-        var dd =  settingPreferences.userPreferences.first()
-
-        Toast.makeText(requireContext(),dd.userName+"",Toast.LENGTH_SHORT).show()
-
-        var dd2 = ModelRecibo(1,0,"","","")
-    }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,

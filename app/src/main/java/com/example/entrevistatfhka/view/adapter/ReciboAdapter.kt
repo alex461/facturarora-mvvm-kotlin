@@ -30,8 +30,6 @@ class ReciboAdapter(var listRecibo: List<ModelFactura> ) :RecyclerView.Adapter<R
 
             etFacturaNombre.text = recibo.recibo.cliente
 
-            
-
             etFacturaCantidad.text = "${recibo.producto.size}"
 
 

@@ -40,7 +40,7 @@ class MyViewModel(private val repositorio: BaseRepository):ViewModel() {
 
 
     fun guardarRecibo () = viewModelScope.launch {
-        repositorio.grardarFactura()
+        repositorio.guardarFactura()
         repositorio.guardarProductos()
 
     }

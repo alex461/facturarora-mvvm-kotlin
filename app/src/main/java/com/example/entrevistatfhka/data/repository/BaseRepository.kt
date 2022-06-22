@@ -33,10 +33,13 @@ class BaseRepository(private val daoRecibo: DaoRecibo,private val settingPrefere
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun grardarFactura() {
+    suspend fun guardarFactura() {
         val preference = settingPreference.userPreferences.first()
         daoRecibo.guardarUsuario(ModelRecibo(0,preference.cedula,"${preference.userName} ${preference.apellido}",
         preference.razonSocialEmisor,"${preference.tipoRif} ${preference.numeroDeRif}"))
+
+        settingPreference.borrarDatosTemporales()
+
 
     }
 

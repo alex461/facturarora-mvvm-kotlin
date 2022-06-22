@@ -73,5 +73,20 @@ class SettingPreference (private  val context :Context){
 
 
     }
+
+    suspend fun borrarDatosTemporales(){
+
+        context.dataStore.edit { preferences ->
+            preferences[USER_NAME_KEY] = ""
+            preferences[LAST_NAME_KEY] = ""
+            preferences[ID_DOCUMENT] = 0
+            preferences[RAZON_SOCIAL] = ""
+            preferences[TIPO_IDENTIFICADOR] = ""
+            preferences[NUMERO_IDENTIFICADOR] = 0
+        }
+
+
+    }
+
 }
 
